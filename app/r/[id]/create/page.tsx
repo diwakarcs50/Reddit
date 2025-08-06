@@ -1,4 +1,5 @@
-import { Card, CardHeader } from "@/components/ui/card";
+"use client"
+import { Card, CardFooter, CardHeader } from "@/components/ui/card";
 import Image from "next/image";
 import pfp from '../../../../public/pfp.png'
 import { Separator } from "@/components/ui/separator";
@@ -9,6 +10,8 @@ import { TabsContent } from "@radix-ui/react-tabs";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { TipTapEditor } from "@/app/components/TipTabEditor";
+import { SubmitButton } from "@/app/components/SubmitButtons";
+import { UploadDropzone } from "@/app/components/Uploadthing";
 
 const rules = [
     {id:1, rule:"Remember the human"},
@@ -38,14 +41,26 @@ export default async function CreatePost({params}:{params:{id:string}}){
 
                 <TabsContent value="post">
                    <Card>
-                    <form>
+                    <form >
                         <CardHeader>
                             <Label>Title</Label>
                             <Input required name="title" placeholder="title"/>
                             <TipTapEditor/>
                         </CardHeader>
+                        <CardFooter className="mt-2">
+                            <SubmitButton text="Create Post"/>
+                        </CardFooter>
                     </form>
                    </Card>
+
+                </TabsContent>
+
+                <TabsContent value="image">
+                    <Card>
+                        <CardHeader>
+                            <UploadDropzone className="ut-upload-icon:size-40 ut-button:bg-primary  ut-button:ut-readying:bg-primary/50 ut-label:text-primary ut-button:ut-uploading:bg-primary/50 ut-button:ut-uploading:after:bg-primary" endpoint="imageUploader" onClientUploadComplete={(res)=>{console.log(res)}} onUploadError={(error:Error)=>alert('Error')}/>
+                        </CardHeader>
+                    </Card>
 
                 </TabsContent>
 
