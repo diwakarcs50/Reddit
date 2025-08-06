@@ -11,6 +11,7 @@ import UserDropdown from './UserDropdown'
 export async function Navbar(){
     const {getUser} = getKindeServerSession()
     const user = await getUser()
+    console.log(user?.picture)
     return (
         <nav className='h-[10vh] w-full flex items-center border-b px-5 lg:px-14 justify-between'>
             <Link href="/" className='flex items-center gap-x-3'>
@@ -21,7 +22,7 @@ export async function Navbar(){
           <div className='flex items-center gap-x-3'>
             <ThemeToggle/>
             {user ? (
-              <UserDropdown userImage={user.picture}/>
+              <UserDropdown userImage={user?.picture}/>
             ):(
             <div className='flex items-center gap-x-4'>
             <Button variant="secondary" asChild><RegisterLink>Sign Up</RegisterLink></Button>

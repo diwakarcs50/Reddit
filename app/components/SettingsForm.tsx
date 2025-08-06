@@ -19,9 +19,11 @@ export  function SettingsForm({username}:{username:string | null | undefined}){
     const [state ,formAction] = useFormState(updateUserName,initialState)
     useEffect(() => {
         if(state?.status === "green"){
-            toast("success",{
-                description:state.message
-            });
+            // toast("success",{
+            //     description:state.message,
+            //     type:"success",
+            // });
+            toast.success(state.message)
         }
 
         else if(state?.status === "error"){
@@ -38,12 +40,12 @@ export  function SettingsForm({username}:{username:string | null | undefined}){
 
             <Label className="text-lg">Username</Label>
             <p className="text-muted-foreground">In this settings page you can change your username</p>
-            <Input defaultValue={username ?? undefined} name="username" required className="mt-2" min={2} maxLength={15}/>
+            <Input defaultValue={username ?? undefined} name="username" required className="mt-2" minLength={2} maxLength={15}/>
             {state?.status === "error" && (<p className="text-red-500 mt-1">{state.message}</p>)}
 
             <div className="w-full flex mt-5 gap-x-5 justify-end">
                 <Button variant="secondary" asChild type="button"><Link href="/">Cancel</Link></Button>
-                 <SubmitButton/>
+                 <SubmitButton text="Change Username"/>
             </div>
         </form>
     )

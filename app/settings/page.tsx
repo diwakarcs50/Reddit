@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { SettingsForm } from "../components/SettingsForm";
 
 async function getData(userId : string){
-   const data =  prisma.user.findUnique({
+   const data = await prisma.user.findUnique({
     where:{
         id:userId
     },
@@ -12,6 +12,7 @@ async function getData(userId : string){
         userName:true
     }
    })
+
    return data
 }
 
